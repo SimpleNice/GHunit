@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="tel" name="phone" id="phone" value="" />
+		<input type="tel" name="phone1" id="phone1" value="" />
+		<button id="but">格式化</button>
+	</body>
+	<script>
+		window.onload=function(){
+			document.getElementById('but').onclick=function(){
+				var phone=document.getElementById("phone").value;
+				phone=phone.replace(/(\s)/g,'');//去除空格
+				var errors=validatemobile(phone);//判断手机号
+				if(errors==undefined){
+					var reg = /^(\d{3})(\d{4})(\d{4})$/;
+					var matches = reg.exec(phone);
+					var newPhone = matches[1] + ' ' + matches[2] + ' ' + matches[3];//添加空格
+					var newPhone1 = phone.replace(/(\d{3})/,'$1 ').replace(/(\d{4})/g,'$1 ');//添加空格
+					document.getElementById("phone").value=newPhone;
+					document.getElementById("phone1").value=newPhone1;
+				}else{
+					alert(errors);
+				}
+			}
+		}
+		//判断手机号
+		function validatemobile(mobile) 
+	    { 
+	    	var error;
+	        if(mobile.length==0) 
+	        { 
+	           error="请输入手机号码！";
+	           return error; 
+	        }     
+	        if(mobile.length!=11) 
+	        { 
+	            error='请输入有效的手机号码！'; 
+	            return error; 
+	        }
+	        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+	        if(!myreg.test(mobile)) 
+	        { 
+	           error='请输入有效的手机号码！'; 
+	           return error; 
+	        } 
+	    } 
+	</script>
+</html>
