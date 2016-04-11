@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="随～心 2016/04/11" />
+		<title>选择星星评价</title>
+	</head>
+	<style type="text/css">
+		.xing{
+			height: 66px;
+			width: 400px;
+			background-image: url(img/xingx.png);
+			top: 30px;
+			left:45%;
+			padding: 8px 0;
+			background-position: left bottom;
+		}
+		.xing li{
+			float: left;
+			width: 80px;
+			border: 0;
+			height: 66px;
+			list-style: none;
+		}
+		/**
+		 * 0星：background-position: left bottom;
+		 * 1星：background-position: left bottom -74px;
+		 * 2星：background-position: left bottom -148px;
+		 * 3星：background-position: left top -148px;
+		 * 4星：background-position: left top -74px;
+		 * 5星：background-position: left top;
+		 */
+
+		
+	</style>
+	<body>
+		<ul  class="xing">
+			<li data-num  = "1"></li>
+			<li data-num  = "2"></li>
+			<li data-num  = "3"></li>
+			<li data-num  = "4"></li>
+			<li data-num  = "5"></li>
+		</ul>
+	</body>
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function(){
+			$('li').on('click',function(){
+				switch($(this).data('num')){
+					case 1:
+						$(".xing").css('background-position','left bottom -74px');
+						break;
+					case 2:
+						$(".xing").css('background-position','left bottom -148px');
+						break;
+					case 3:
+						$(".xing").css('background-position','left top -148px');
+						break;
+					case 4:
+						$(".xing").css('background-position','left top -74px');
+						break;
+					case 5:
+						$(".xing").css('background-position','left top');
+						break;
+					default:
+						break;
+				}		
+			})
+		})
+	</script>
+</html>
