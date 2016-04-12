@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="but">点我</button>
+	</body>
+	<script>
+		//js
+		function time(o,wait) {  
+	        if (wait == 0) {  
+	        	o.disabled=false;            
+	            o.innerHTML="重新获取";  
+	        } else {  
+	        	o.disabled=true;  
+	        	o.innerHTML=wait+'s';  
+	            wait--;  
+	            setTimeout(function() {  
+	                time(o,wait);  
+	            },  
+	            1000)  
+	        }  
+		} 
+		//jquery
+		function time1(o,wait) {  
+	        if (wait == 0) {  
+	        	$(o).removeAttr("disabled");            
+	            $(o).text("重新获取");   
+	        } else {  
+	        	$(o).attr("disabled", true);  
+	        	$(o).text(wait+'s');  
+	            wait--;  
+	            setTimeout(function() {  
+	                time(o,wait);  
+	            },  
+	            1000)  
+	        }  
+		}  
+		window.onload=function(){
+			var but=document.getElementById('but');
+			but.onclick=function(){
+				time(this,60);
+			}
+		}
+	</script>
+</html>
