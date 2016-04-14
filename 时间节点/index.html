@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		.group{
+			margin: 0 auto;
+			height: 80px;
+		}
+		.group ul{
+			height: 40px;
+			padding: 0;
+			margin: 0;	
+		}
+		.group ul li{
+			float: left;
+			width: 18%;
+			list-style: none;
+			height: 40px;
+			position: relative;
+			text-align: center;
+			line-height: 40px;
+		}
+		.group ul li:first-child,.group ul li:last-child{
+			width: 9%;
+		}
+		.group ul li:first-child{
+			text-align: left;
+		}
+		.group ul li:last-child{
+			text-align: right;
+		}
+		.group ul li:first-child .round{
+			left: 0;
+		}
+		.group ul li:first-child .horizontal{
+			left: 2%;
+			width: 98%;
+		}
+		.group ul li:last-child .round{
+			right: 0;
+			left: auto;
+		}
+		.group ul li:last-child .horizontal{
+			right: 2%;
+			width: 98%;
+		}
+		.round{
+			position: absolute;
+			height: 40px;
+			background-color: #DAE0E2;
+			border-radius: 20px;
+			width: 40px;
+			left: 43%;
+			z-index: 99;
+			color: #FFF;
+			text-align: center;
+		}
+		.horizontal{
+			position: absolute;
+			width:100%;
+			height: 15px;
+			margin:13px 0;
+			background-color: #DAE0E2;
+		}
+		.o_color{
+			background-color: #0BB20C;
+		}
+	</style>
+	<body>
+		<div class="group">
+			<ul>
+				<li>
+					&nbsp;&nbsp;预约
+				</li>
+				<li>
+					接车
+				</li>
+				<li>
+					维修
+				</li>
+				<li>
+					付款
+				</li>
+				<li>
+					完成&nbsp;&nbsp;
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<div class="round"></div>
+					<div class="horizontal"></div>
+				</li>
+				<li>
+					<div class="round"></div>
+					<div class="horizontal"></div>
+				</li>
+				<li>
+					<div class="round"></div>
+					<div class="horizontal"></div>
+				</li>
+				<li>
+					<div class="round"></div>
+					<div class="horizontal"></div>
+				</li>
+				<li>
+					<div class="round"></div>
+					<div class="horizontal"></div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.round').click(function(){
+				$(this).parent().find('.round').text('OK');
+				$(this).parent().find('.round,.horizontal').addClass('o_color');
+				$(this).parent().prevAll().find('.round,.horizontal').addClass('o_color');
+				$(this).parent().prevAll().find('.round').text("OK");
+				$(this).parent().nextAll().find('.round,.horizontal').removeClass('o_color');
+				$(this).parent().nextAll().find('.round').text("");
+			})
+		})
+	</script>
+</html>

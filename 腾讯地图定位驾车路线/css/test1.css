@@ -1,0 +1,50 @@
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0;-webkit-text-size-adjust:100%;}
+li{list-style:none;}
+.caty{
+	margin-top: 10px;
+    border-radius: 50%;
+    background-color: #D6CDCD;
+    height: 30px;
+    width: 50%;
+    margin-left: 25%;
+}
+.catyF{
+	text-align: center;
+	position: relative;
+	z-index: 99;
+	width: 100%;
+	background-color:aliceblue;
+	height: 80px;
+}
+.catyX{
+	left: 15%;
+	position: absolute;
+	width: 70%;
+	height:15px;
+	top: 60%;
+	float: left;
+	background-color: #D6CDCD;
+}
+.catyH ul{
+	position: absolute;
+	width: 90%;
+	height: 60px;
+	top:10px;
+	left: 5%;
+}
+.catyH ul li{
+	width:20%;
+	height: 60px;
+	border-radius: 30px ;
+	float: left;
+}
+.catyH ul li label{
+	width:10%;
+	height: 60px;
+	background-color: #D6CDCD;
+	border-radius: 30px ;
+}
+.catyD{
+	height: 100%;
+	width: 100%;
+}

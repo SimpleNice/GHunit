@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body>
+		<div class="content">
+			<div class="map" id="contain_map">
+			</div>
+			<!--<div civ="personalCenter">
+				<div class="fload_min_personal">
+					<img src="img/xiaoren.png" id="img_but"/>
+				</div>
+				<div class="fload_prespmal" id="prespmal">
+					<ul>
+						<li><img src="img/touxiang.gif" alt="用户头像" width="60"/><span>刘斌</span></li>
+						<a href="me_collect.html"><li>我的收藏</li></a>
+						<a href="history.html"><li>历史记录</li></a>
+						<a href="setting.html"><li>设置</li></a>
+						<li>关于</li>
+					</ul>
+				</div>
+			</div>
+			<div class="catyF">
+				<div class="catyH">
+					<div class="catyX"></div>
+						<ul>
+							<li>
+								<div class="catyD">
+									<div>
+										维修
+									</div>						
+									<div class="caty" id="caty_1" onclick="statusChange(this,1)">		
+										<img src="img/red_1.png" class="imgs"/>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="catyD">
+									<div >
+										保养
+									</div>
+									<div class="caty" id="caty_2" onclick="statusChange(this,2)">
+										<img src="img/green_1.png" class="imgs hide"/>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="closeBut hide" id="guanbi">Close</div>-->
+			<div class="panel" id="r-result" style="width: 20%;height: 100%;top: 0px;right: 0px;border: 0;box-shadow: 0px 0px 5px #000000;"></div><!--显示驾车路线详细信息-->
+			<!--<div class="maptags hide">
+				驾车路线结果
+			</div>
+			<div class="layer_window hide">
+				<div class="l_title">
+					请填写车辆故障信息
+				<!--	<div class="closeBut" id="guanbi2">close</div>-->
+				<!--</div>
+				<div class="l_content">
+					<div class="group">
+						<div class="g_title">
+							<span>车型：</span>
+						</div>
+						<div class="g_content">
+							<select type="text" />
+								<option value="1">奔驰S600</option>
+								<option value="2">宝马X6</option>
+							</select>
+						</div>		
+					</div>
+					<div class="group">
+						<div class="g_title">
+							<span>故障描述：</span>
+						</div>	
+						<div class="g_content">	
+							<textarea type="text" rows="6"></textarea>
+						</div>	
+						<div class="g_title">
+							<span></span>
+						</div>	
+						<div class="g_content">	
+								<div class="g_box">
+									<img src="img/make.png" width="100%"/>
+								</div>
+								<div class="g_box input_wrp">
+									<input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+								</div>
+						</div>	
+					</div>
+					<div class="l_buts">
+						<a class="defaul" href="javascript:;">取消</a>
+						<a class="primary" href="javascript:;">确定</a>
+					</div>
+				</div>
+			</div>-->
+		</div>
+		<!--遮罩层-->
+		<!--<div class="zhezhao">
+		</div>-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+	<!--<script type="text/javascript">
+		$(function(){
+			$('#img_but').bind('click',function(){
+				$('#prespmal').css('right','-60%');
+				$('#prespmal').removeClass('anima1');
+				$('#prespmal').addClass('anima');
+				$('.zhezhao').css('display','block');
+			})
+			$('.zhezhao').bind('click',function(){
+				$('#prespmal').css('right','0%');
+				$('#prespmal').removeClass('anima');
+				$('#prespmal').addClass('anima1');
+				$('.zhezhao').css('display','none');
+			})
+		})
+	</script>-->
+	<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+	<script type="text/javascript">
+	$(function(){
+		var map;
+		var makers,center,makersIcon;
+		var anchor = new qq.maps.Point(40, 40),
+	        size = new qq.maps.Size(40, 40),
+	        origin = new qq.maps.Point(0, 0),
+	        icon = new qq.maps.MarkerImage('img/center.gif', size, origin, anchor);
+        var latlngs = [];
+		//定义添加标记函数
+		function addMaker(location){
+			 var marker = new qq.maps.Marker({
+		        map: map,
+		        position:location,
+		    });
+		    makers=marker;
+		}
+		//定义添加自定义标记函数
+		function addMakerIcon(location){
+			 var markerIcon = new qq.maps.Marker({
+		        icon:icon,
+		        map: map,
+		        position:location,
+		    });
+		    makersIcon=markerIcon;
+		}
+		//循环标注地图
+		function marketFor(latlngs,map,center){
+			for(var i = 0;i < latlngs.length; i++) {
+		        (function(n){
+		            var marker = new qq.maps.Marker({
+		                position: latlngs[n],
+		                map: map 
+		            });
+		            qq.maps.event.addListener(marker, 'click', function() {
+		                	var drivingService = new qq.maps.DrivingService({
+							    map: map,
+							    panel: document.getElementById('r-result'),
+							});
+							//获取驾车路线
+							drivingService.search(center,latlngs[n]);
+		            });
+		        })(i);
+			 }
+		}
+		//获取浏览器定位坐标
+		function getLocation(){
+		  	if(navigator.geolocation){
+		    	return navigator.geolocation.getCurrentPosition(showPosition,showError);
+		    }else{
+		    	$('#contain_map').text("浏览器不支持定位.");
+		    }
+		 }
+		//定位成功回调函数
+		function showPosition(position){
+			var lat=position.coords.latitude; 
+			var lng=position.coords.longitude;
+			qq.maps.convertor.translate(new qq.maps.LatLng(lat,lng),1,function(res){
+				center=res[0];
+				map = new qq.maps.Map(document.getElementById("contain_map"),{
+			        center: center,
+			        zoom:17,
+			    	}); 
+			    addMakerIcon(center);  
+			    //添加监听事件  获取鼠标点击事件
+			    qq.maps.event.addListener(map, 'click', function(event) {
+			       latlngs.push(event.latLng);
+			       marketFor(latlngs,map,center);	
+			    }); 	   
+			});		
+		}
+		function showError(error)
+	 	{
+		  	switch(error.code) 
+		    {
+			    case error.PERMISSION_DENIED:
+			     	$('#contain_map').text("用户拒绝对获取地理位置的请求。");
+			     	break;
+			    case error.POSITION_UNAVAILABLE:
+				    $('#contain_map').text("位置信息是不可用的。");
+				    break;
+			    case error.TIMEOUT:
+				    $('#contain_map').text("请求用户地理位置超时。");
+				    break;
+			    case error.UNKNOWN_ERROR:
+				    $('#contain_map').text("未知错误。");
+				    break;
+		    }
+	  	}
+		getLocation();
+	});
+	</script>
+
+	<!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript">
+			//通过config接口注入权限验证配置
+			wx.config({
+			    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			    appId: '', // 必填，公众号的唯一标识
+			    timestamp: '<?php echo time();?>', // 必填，生成签名的时间戳
+			    nonceStr: '<?php echo $nonceStr;?>', // 必填，生成签名的随机串
+			    signature: '<?php echo $signature;?>',// 必填，签名
+			    jsApiList: [] // 必填，需要使用的JS接口列表
+			});
+			//通过ready接口处理成功验证
+			wx.ready(function(){
+				// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后
+			});
+		</script>-->
+</html>

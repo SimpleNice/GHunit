@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="number" name="time" id="time"/>
+		<button id="but">点我</button>
+		<lable id="lab1"></lable>分<lable id="lab2"></lable>秒
+	</body>
+	<script type="text/javascript">
+		document.getElementById('but').onclick=function(){
+			var num=document.getElementById('time').value;
+			var lab1=document.getElementById('lab1');
+			var lab2=document.getElementById('lab2');
+			time(lab2,lab1,num,0);
+		}
+		function time(o,m,ms,wait) { 
+	        if (wait == 0) {  
+	        	if(ms>0){
+	        		ms=ms-1;
+	        		m.innerHTML=ms;
+		        	wait=60;
+		        	time(o,m,ms,wait);
+				}else{
+					o.innerHTML=0;
+		        	m.innerHTML=0;
+				}
+	        }else{  
+	        	o.disabled=true; 
+	        	o.innerHTML=wait;  
+	            wait--;  
+	            setTimeout(function() {  
+	                time(o,m,ms,wait);  
+	            },  
+	            1000);  
+	        }  
+		} 
+	</script>
+</html>
